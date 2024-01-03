@@ -33,6 +33,9 @@ public class UsuarioService {
 			return Optional.empty();
 		}
 
+		if (usuario.getFoto().isBlank())
+			usuario.setFoto("https://ik.imagekit.io/mgz6clat5/user.png?updatedAt=1704302413141");
+
 		usuario.setSenha(criptografarSenha(usuario.getSenha()));
 
 		return Optional.ofNullable(usuarioRepository.save(usuario));
@@ -46,6 +49,9 @@ public class UsuarioService {
 
 			if (buscaUsuario.isPresent() && (buscaUsuario.get().getId() != usuario.getId()))
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existe!");
+
+			if (usuario.getFoto().isBlank())
+				usuario.setFoto("https://ik.imagekit.io/mgz6clat5/user.png?updatedAt=1704302413141");
 
 			usuario.setSenha(criptografarSenha(usuario.getSenha()));
 			return Optional.ofNullable(usuarioRepository.save(usuario));

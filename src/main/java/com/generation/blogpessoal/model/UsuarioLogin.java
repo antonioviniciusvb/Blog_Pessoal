@@ -17,6 +17,11 @@ public class UsuarioLogin {
 		this.foto = foto;
 	}
 
+	
+//	public UsuarioLogin() {
+//	}
+
+
 	public Long getId() {
 		return this.id;
 	}
