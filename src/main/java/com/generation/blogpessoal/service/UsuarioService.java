@@ -41,10 +41,10 @@ public class UsuarioService {
 
 	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
 		if (usuarioRepository.findById(usuario.getId()).isPresent()) {
-			
+
 			Optional<Usuario> buscaUsuario = usuarioRepository.findByUsuario(usuario.getUsuario());
-			
-			if(buscaUsuario.isPresent() && (buscaUsuario.get().getId() != usuario.getId()))
+
+			if (buscaUsuario.isPresent() && (buscaUsuario.get().getId() != usuario.getId()))
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existe!");
 
 			usuario.setSenha(criptografarSenha(usuario.getSenha()));
@@ -56,6 +56,7 @@ public class UsuarioService {
 	}
 
 	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
+
 		var credenciais = new UsernamePasswordAuthenticationToken(usuarioLogin.get().getUsuario(),
 				usuarioLogin.get().getSenha());
 
@@ -80,9 +81,9 @@ public class UsuarioService {
 				return usuarioLogin;
 
 			}
-			
+
 		}
-		
+
 		return Optional.empty();
 	}
 
